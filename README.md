@@ -55,3 +55,7 @@ $ npm run start
 import Tab from 'tab';
 new Tab('test');
 ```
+
+## Options
+- `id`(string):発行するID***(default: \`${tabContainerName}-tab\`)***
+- `firstShowIndex`(number):最初に見せるタブの番号***(default: 0)***
