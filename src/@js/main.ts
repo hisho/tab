@@ -27,11 +27,21 @@ class Tab {
   click(element:HTMLElement,index:number) {
     const isSelected = element.getAttribute('aria-selected') === 'true';
     if (isSelected) return;
-    console.log(element);
-    console.log(index);
+    const hideTabButtons = this.tabButtons.filter((x,i) => i !== index);
+    const hideTabContainers = this.tabContents.filter((x,i) => i !== index);
+    this.show(element,this.tabContents[index]);
+    this.hide(hideTabButtons,hideTabContainers);
     }
   isFirstItem(index:number):boolean {
     return index === 0;
+  }
+  show(tabButton:HTMLElement,tabContainer:HTMLElement) {
+    this.setAriaSelected(tabButton,true);
+    this.setAriaHidden(tabContainer,false);
+  }
+  hide(tabButtons:HTMLElement[],tabContainers:HTMLElement[]) {
+    tabButtons.forEach(x => this.setAriaSelected(x,false));
+    tabContainers.forEach(x => this.setAriaHidden(x,true));
   }
   setAriaControls(element:HTMLElement,value:(number|string)) {
     element.setAttribute('aria-controls', `${this.tabContainerName}-tab${value}`);
