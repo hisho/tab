@@ -1,2 +1,2 @@
-import test from './modules/test';
-test();
+import _Tab from './modules/tab';
+_Tab();
