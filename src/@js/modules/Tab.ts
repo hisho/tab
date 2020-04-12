@@ -1,6 +1,7 @@
 import merge from "deepmerge";
 
 interface TabOptions {
+  id?: string
   firstShowIndex?: number
 }
 
@@ -11,11 +12,12 @@ export default class Tab {
   tabContents:HTMLElement[];
   options: TabOptions;
   constructor(tabContainerName:string,options:TabOptions = {}) {
+    this.tabContainerName = tabContainerName;
     const defaultOptions:TabOptions = {
+      id: `${this.tabContainerName}-tab`,
       firstShowIndex: 0
     };
     this.options = merge(defaultOptions, options);
-    this.tabContainerName = tabContainerName;
     this.tabContainerElement = document.getElementById(this.tabContainerName);
     this.tabButtons = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tab"]')];
     this.tabContents = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
@@ -52,10 +54,10 @@ export default class Tab {
     tabContainers.forEach(x => this.setAriaHidden(x,true));
   }
   setAriaControls(element:HTMLElement,value:(number|string)) {
-    element.setAttribute('aria-controls', `${this.tabContainerName}-tab${value}`);
+    element.setAttribute('aria-controls', `${this.options.id}${value}`);
   }
   setID(element:HTMLElement,value:(number|string)) {
-    element.setAttribute('id', `${this.tabContainerName}-tab${value}`);
+    element.setAttribute('id', `${this.options.id}${value}`);
   }
   setAriaHidden(element:HTMLElement,value:boolean) {
     element.setAttribute('aria-hidden', `${value}`);
