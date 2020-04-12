@@ -54,9 +54,11 @@ export default class Tab {
     tabContainers.forEach(x => this.setAriaHidden(x,true));
   }
   setAriaControls(element:HTMLElement,value:(number|string)) {
+    value = String(value).padStart(2, '0');
     element.setAttribute('aria-controls', `${this.options.id}${value}`);
   }
   setID(element:HTMLElement,value:(number|string)) {
+    value = String(value).padStart(2, '0');
     element.setAttribute('id', `${this.options.id}${value}`);
   }
   setAriaHidden(element:HTMLElement,value:boolean) {
