@@ -3,7 +3,7 @@ export default class Tab {
   tabContainerElement:HTMLElement;
   tabButtons:HTMLElement[];
   tabContents:HTMLElement[];
-  constructor(tabContainerName) {
+  constructor(tabContainerName:string) {
     this.tabContainerName = tabContainerName;
     this.tabContainerElement = document.getElementById(this.tabContainerName);
     this.tabButtons = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tab"]')];
