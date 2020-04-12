@@ -13,7 +13,7 @@ $ npm run start
 
 
 ## HTML
-```haml
+```html
 <div id="test">
   <div role="tablist">
     <div role="presentation">
@@ -40,19 +40,12 @@ $ npm run start
 
 ## Scss
 ```scss
-.tab {
-  &__header {}
-  &__button {
-    > button {}
+[role="tabpanel"] {
+  &[aria-hidden="true"] {
+    display: none;
   }
-  &__body {}
-  &__content {
-    &[aria-hidden="true"] {
-      display: none;
-    }
-    &[aria-hidden="false"] {
-      display: block;
-    }
+  &[aria-hidden="false"] {
+    display: block;
   }
 }
 ```
