@@ -13,11 +13,11 @@
     ],
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "strictNullChecks": false,
-    "strictFunctionTypes": false,
-    "strictBindCallApply": false,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
     "strictPropertyInitialization": false,
-    "noImplicitThis": false
+    "noImplicitThis": true
   }
 }
