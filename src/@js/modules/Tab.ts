@@ -22,10 +22,10 @@ export default class Tab {
     });
   }
   click(element:HTMLElement,index:number) {
-    const isSelected = element.getAttribute('aria-selected') === 'true';
+    const isSelected:boolean = element.getAttribute('aria-selected') === 'true';
     if (isSelected) return;
-    const hideTabButtons = this.tabButtons.filter((x,i) => i !== index);
-    const hideTabContainers = this.tabContents.filter((x,i) => i !== index);
+    const hideTabButtons:HTMLElement[] = this.tabButtons.filter((x,i) => i !== index);
+    const hideTabContainers:HTMLElement[] = this.tabContents.filter((x,i) => i !== index);
     this.show(element,this.tabContents[index]);
     this.hide(hideTabButtons,hideTabContainers);
   }
