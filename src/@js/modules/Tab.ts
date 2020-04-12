@@ -1,9 +1,20 @@
+import merge from "deepmerge";
+
+interface TabOptions {
+  firstShowIndex?: number
+}
+
 export default class Tab {
   tabContainerName: string;
   tabContainerElement:HTMLElement;
   tabButtons:HTMLElement[];
   tabContents:HTMLElement[];
-  constructor(tabContainerName:string) {
+  options: TabOptions;
+  constructor(tabContainerName:string,options:TabOptions = {}) {
+    const defaultOptions:TabOptions = {
+      firstShowIndex: 0
+    };
+    this.options = merge(defaultOptions, options);
     this.tabContainerName = tabContainerName;
     this.tabContainerElement = document.getElementById(this.tabContainerName);
     this.tabButtons = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tab"]')];
@@ -13,12 +24,12 @@ export default class Tab {
   init() {
     this.tabButtons.forEach((tabButton, index) => {
       this.setAriaControls(tabButton,index);
-      this.setAriaSelected(tabButton,this.isFirstItem(index));
+      this.setAriaSelected(tabButton,this.isFirstShowItem(index));
       tabButton.addEventListener('click', () => this.click(tabButton,index));
     });
     this.tabContents.forEach((tabContent, index) => {
       this.setID(tabContent,index);
-      this.setAriaHidden(tabContent,!this.isFirstItem(index));
+      this.setAriaHidden(tabContent,!this.isFirstShowItem(index));
     });
   }
   click(element:HTMLElement,index:number) {
@@ -29,8 +40,8 @@ export default class Tab {
     this.show(element,this.tabContents[index]);
     this.hide(hideTabButtons,hideTabContainers);
   }
-  isFirstItem(index:number):boolean {
-    return index === 0;
+  isFirstShowItem(index:number):boolean {
+    return index === this.options.firstShowIndex;
   }
   show(tabButton:HTMLElement,tabContainer:HTMLElement) {
     this.setAriaSelected(tabButton,true);
