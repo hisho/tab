@@ -12,20 +12,21 @@ class Tab {
     this.tabButtons = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tab"]')];
     this.tabContents = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
     this.init();
-    this.tabButtons.forEach(x => x.addEventListener('click',this.click))
   }
   init() {
     this.tabButtons.forEach((tabButton, index) => {
       this.setAriaControls(tabButton,index);
       this.setAriaSelected(tabButton,this.isFirstItem(index));
+      tabButton.addEventListener('click', () => this.click(tabButton,index));
     });
     this.tabContents.forEach((tabContent, index) => {
       this.setID(tabContent,index);
       this.setAriaHidden(tabContent,!this.isFirstItem(index));
     });
   }
-  click() {
-    console.log('押されたよ');
+  click(element:HTMLElement,index:number) {
+    console.log(element);
+    console.log(index);
   }
   isFirstItem(index:number):boolean {
     return index === 0;
@@ -44,4 +45,4 @@ class Tab {
   }
 }
 
-const myTab = new Tab('test');
+new Tab('test');
