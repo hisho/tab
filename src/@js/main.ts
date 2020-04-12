@@ -6,8 +6,8 @@ class Tab {
   tabContainerElement:HTMLElement;
   tabButtons:HTMLElement[];
   tabContents:HTMLElement[];
-  constructor(test) {
-    this.tabContainerName = test;
+  constructor(tabContainerName) {
+    this.tabContainerName = tabContainerName;
     this.tabContainerElement = document.getElementById(this.tabContainerName);
     this.tabButtons = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tab"]')];
     this.tabContents = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
@@ -25,9 +25,11 @@ class Tab {
     });
   }
   click(element:HTMLElement,index:number) {
+    const isSelected = element.getAttribute('aria-selected') === 'true';
+    if (isSelected) return;
     console.log(element);
     console.log(index);
-  }
+    }
   isFirstItem(index:number):boolean {
     return index === 0;
   }
