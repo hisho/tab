@@ -26,7 +26,7 @@ export default class Tab {
     this.init();
   }
   init() {
-    if(this.options.hash) this.addHash(this.options.firstShowIndex);
+    if(this.options.hash) this.initHash();
     this.tabButtons.forEach((tabButton, index) => {
       this.setAriaControls(tabButton,index);
       this.setAriaSelected(tabButton,this.isFirstShowItem(index));
@@ -56,6 +56,10 @@ export default class Tab {
   hide(tabButtons:HTMLElement[],tabContainers:HTMLElement[]) {
     tabButtons.forEach(x => this.setAriaSelected(x,false));
     tabContainers.forEach(x => this.setAriaHidden(x,true));
+  }
+  initHash() {
+    const currentHash:string = window.location.hash;
+    if(currentHash === '') this.addHash(this.options.firstShowIndex);
   }
   addHash(index:(number|string)) {
     index = String(index).padStart(2, '0');
