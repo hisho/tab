@@ -11,6 +11,7 @@ export default class Tab {
   tabContainerElement:HTMLElement;
   tabButtons:HTMLElement[];
   tabContents:HTMLElement[];
+  idList:string[];
   options: TabOptions;
   constructor(tabContainerName:string,options:TabOptions = {}) {
     this.tabContainerName = tabContainerName;
@@ -23,6 +24,7 @@ export default class Tab {
     this.tabContainerElement = document.getElementById(this.tabContainerName);
     this.tabButtons = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tab"]')];
     this.tabContents = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    this.idList = this.makeIdList();
     this.init();
   }
   init() {
@@ -61,19 +63,22 @@ export default class Tab {
     const currentHash:string = window.location.hash;
     if(currentHash === '') this.addHash(this.options.firstShowIndex);
   }
-  addHash(index:(number|string)) {
-    index = String(index).padStart(2, '0');
-    history.replaceState(undefined, undefined, `#${this.options.id}${index}`);
+  addHash(index:number) {
+    history.replaceState(undefined, undefined, `#${this.idList[index]}`);
     //ヒストリーに残す場合の処理
     // window.location.hash = `#${this.options.id}${index}`;
   }
-  setAriaControls(element:HTMLElement,value:(number|string)) {
-    value = String(value).padStart(2, '0');
-    element.setAttribute('aria-controls', `${this.options.id}${value}`);
+  makeIdList() {
+    return this.tabButtons.map((x,index) => {
+      const currentIndex:string = String(index).padStart(2, '0');
+      return `${this.options.id}${currentIndex}`;
+    });
   }
-  setID(element:HTMLElement,value:(number|string)) {
-    value = String(value).padStart(2, '0');
-    element.setAttribute('id', `${this.options.id}${value}`);
+  setAriaControls(element:HTMLElement,index:number) {
+    element.setAttribute('aria-controls', `${this.idList[index]}`);
+  }
+  setID(element:HTMLElement,index:number) {
+    element.setAttribute('id', `${this.idList[index]}`);
   }
   setAriaHidden(element:HTMLElement,value:boolean) {
     element.setAttribute('aria-hidden', `${value}`);
