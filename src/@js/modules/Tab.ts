@@ -18,7 +18,7 @@ export default class Tab {
     const defaultOptions:TabOptions = {
       id: `${this.tabContainerName}-tab`,
       firstShowIndex: 0,
-      hash: true
+      hash: false
     };
     this.options = merge(defaultOptions, options);
     this.tabContainerElement = document.getElementById(this.tabContainerName);
