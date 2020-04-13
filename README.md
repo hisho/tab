@@ -1,7 +1,6 @@
 # DOMを操作してtabを作る練習
 
 ## インストール
-
 ### install
 ```zsh
 $ npm ci
@@ -10,6 +9,7 @@ $ npm ci
 ```zsh
 $ npm run start
 ```
+
 
 
 ## HTML
@@ -38,6 +38,8 @@ $ npm run start
 </div>
 ```
 
+
+
 ## Scss
 ```scss
 [role="tabpanel"] {
@@ -50,11 +52,21 @@ $ npm run start
 }
 ```
 
+
+
+## DEMO
+* [Basic](https://hishohub.github.io/tab/)
+* ~~hash~~
+
+
+
 ## Usage
 ```javascript
 import Tab from 'tab';
 new Tab('test');
 ```
+
+
 
 ## Options
 - `id`(string):発行するID **(default: \`${tabContainerName}-tab\`)**
