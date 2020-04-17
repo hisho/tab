@@ -56,7 +56,7 @@ $ npm run start
 
 ## DEMO
 * [Basic](https://hishohub.github.io/tab/)
-* ~~hash~~
+* [Hash](https://hishohub.github.io/tab/hash)
 
 
 
