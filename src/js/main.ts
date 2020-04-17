@@ -1,6 +1,6 @@
 import Tab from './modules/Tab';
 
-const basic = document.getElementById('basic') ? new Tab('basic', {}) : null;
+const basic = document.getElementById('basic') ? new Tab('basic', ) : null;
 const hash1 = document.getElementById('hash1') ? new Tab('hash1', {
   hash: true
 }) : null;

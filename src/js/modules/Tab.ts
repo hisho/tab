@@ -12,6 +12,7 @@ export default class Tab {
   tabButtons:HTMLElement[];
   tabContents:HTMLElement[];
   idList:string[];
+  currentHash: string;
   options: TabOptions;
   constructor(tabContainerName:string,options:TabOptions = {}) {
     this.tabContainerName = tabContainerName;
@@ -25,6 +26,7 @@ export default class Tab {
     this.tabButtons = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tab"]')];
     this.tabContents = [...this.tabContainerElement.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
     this.idList = this.makeIdList();
+    this.currentHash = window.location.hash.replace(/^#/,'');
     this.init();
   }
   init() {
@@ -49,7 +51,9 @@ export default class Tab {
     this.hide(hideTabButtons,hideTabContainers);
   }
   isFirstShowItem(index:number):boolean {
-    return index === this.options.firstShowIndex;
+    const hasCurrentHash:number = this.idList.indexOf(this.currentHash);
+    const firstShowIndex:number = hasCurrentHash !== -1 ? hasCurrentHash :this.options.firstShowIndex;
+    return index === firstShowIndex;
   }
   show(tabButton:HTMLElement,tabContainer:HTMLElement) {
     this.setAriaSelected(tabButton,true);
