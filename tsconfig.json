@@ -1,3 +1,4 @@
+// tsの構文チェック設定
 {
   "compilerOptions": {
     "sourceMap": true,
@@ -13,11 +14,11 @@
     ],
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictNullChecks": false,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
     "strictPropertyInitialization": false,
-    "noImplicitThis": true
+    "noImplicitThis": false
   }
 }
