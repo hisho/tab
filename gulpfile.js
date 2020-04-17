@@ -6,6 +6,7 @@ const rename = require('gulp-rename');
 const plumber = require('gulp-plumber');
 const notify  = require('gulp-notify');
 const json = JSON.parse(fs.readFileSync('src/ejs/data/json.json'));
+const hash = JSON.parse(fs.readFileSync('src/ejs/data/hash.json'));
 
 const ejs = (cb) => {
   gulp
@@ -15,7 +16,8 @@ const ejs = (cb) => {
       errorHandler: notify.onError("Error: <%= error.message %>")
     }))
     .pipe(gulpEjs({
-      example: json.example
+      example: json.example,
+      hash: hash.hash
     }))
     // .ejsを.htmlへリネーム
     .pipe(rename({ extname: '.html' }))

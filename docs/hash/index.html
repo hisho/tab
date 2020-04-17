@@ -14,28 +14,61 @@
   <main class="main" id="main">
     <div class="wrapper">
 
-      <div class="tab" id="hash">
+      
+      <div class="tab" id="hash1">
         <div class="tab__header" role="tablist">
+          
           <div class="tab__button" role="presentation">
-            <button type="button" role="tab">タブのボタン1</button>
+            <button type="button" role="tab">ハッシュボタン1</button>
           </div>
+          
           <div class="tab__button" role="presentation">
-            <button type="button" role="tab">タブのボタン2</button>
+            <button type="button" role="tab">ハッシュボタン2</button>
           </div>
+          
           <div class="tab__button" role="presentation">
-            <button type="button" role="tab">タブのボタン2</button>
+            <button type="button" role="tab">ハッシュボタン3</button>
           </div>
+          
         </div>
         <div class="tab__body">
-          <div class="tab__content" role="tabpanel">
-            role属性と構造さえあっていれば動くのでタグは適当に変えてください<br>
-            今回はクラスを発行していないのでcssは[aria-selected="false"]と[aria-hidden="true"]でopen,closeを判定してください<br>
-            button要素だとエンターキーでclickイベントが走るので、なるべく使ってほしいです。
-          </div>
-          <div class="tab__content" role="tabpanel">タブの内容2</div>
-          <div class="tab__content" role="tabpanel">タブの内容3</div>
+          
+          <div class="tab__content" role="tabpanel">hash: tureを指定することで、hashが発行されます。</div>
+          
+          <div class="tab__content" role="tabpanel">内容2</div>
+          
+          <div class="tab__content" role="tabpanel">内容3</div>
+          
         </div>
       </div>
+        
+      <div class="tab" id="hash2">
+        <div class="tab__header" role="tablist">
+          
+          <div class="tab__button" role="presentation">
+            <button type="button" role="tab">ハッシュボタン1(option)</button>
+          </div>
+          
+          <div class="tab__button" role="presentation">
+            <button type="button" role="tab">ハッシュボタン2(option)</button>
+          </div>
+          
+          <div class="tab__button" role="presentation">
+            <button type="button" role="tab">ハッシュボタン3(option)</button>
+          </div>
+          
+        </div>
+        <div class="tab__body">
+          
+          <div class="tab__content" role="tabpanel">オプションで自由にハッシュの値を変えることができます。<br>ここではmyHashとしています</div>
+          
+          <div class="tab__content" role="tabpanel">内容2</div>
+          
+          <div class="tab__content" role="tabpanel">内容3</div>
+          
+        </div>
+      </div>
+        
 
     </div>
   </main>
