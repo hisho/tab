@@ -6,6 +6,12 @@ interface TabOptions {
   hash?: boolean
 }
 
+/* TODO
+* ハッシュ周りのバグ修正
+* ハッシュの初期値の値を00から01に変更
+*
+* */
+
 class Tab {
   tabContainerName: string;
   tabContainerElement:HTMLElement;
@@ -29,6 +35,8 @@ class Tab {
     this.currentHash = window.location.hash.replace(/^#/,'');
     this.init();
   }
+
+
   init() {
     if(this.options.hash) this.initHash();
     this.tabButtons.forEach((tabButton, index) => {
@@ -41,6 +49,8 @@ class Tab {
       this.setAriaHidden(tabContent,!this.isFirstShowItem(index));
     });
   }
+
+
   click(element:HTMLElement,index:number) {
     const isSelected:boolean = element.getAttribute('aria-selected') === 'true';
     if (isSelected) return;
@@ -50,43 +60,63 @@ class Tab {
     this.show(element,this.tabContents[index]);
     this.hide(hideTabButtons,hideTabContainers);
   }
+
+
   isFirstShowItem(index:number):boolean {
     const hasCurrentHash:number = this.idList.indexOf(this.currentHash);
     const firstShowIndex:number = hasCurrentHash !== -1 ? hasCurrentHash :this.options.firstShowIndex;
     return index === firstShowIndex;
   }
+
+
   show(tabButton:HTMLElement,tabContainer:HTMLElement) {
     this.setAriaSelected(tabButton,true);
     this.setAriaHidden(tabContainer,false);
   }
+
+
   hide(tabButtons:HTMLElement[],tabContainers:HTMLElement[]) {
     tabButtons.forEach(x => this.setAriaSelected(x,false));
     tabContainers.forEach(x => this.setAriaHidden(x,true));
   }
+
+
   initHash() {
     const currentHash:string = window.location.hash;
     if(currentHash === '') this.addHash(this.options.firstShowIndex);
   }
+
+
   addHash(index:number) {
     history.replaceState(undefined, undefined, `#${this.idList[index]}`);
     //ヒストリーに残す場合の処理
     // window.location.hash = `#${this.options.id}${index}`;
   }
+
+
   makeIdList() {
     return this.tabButtons.map((x,index) => {
       const currentIndex:string = String(index).padStart(2, '0');
       return `${this.options.id}${currentIndex}`;
     });
   }
+
+
   setAriaControls(element:HTMLElement,index:number) {
     element.setAttribute('aria-controls', `${this.idList[index]}`);
   }
+
+
   setID(element:HTMLElement,index:number) {
     element.setAttribute('id', `${this.idList[index]}`);
   }
+
+
   setAriaHidden(element:HTMLElement,value:boolean) {
     element.setAttribute('aria-hidden', `${value}`);
   }
+
+
   setAriaSelected(element:HTMLElement,value:boolean) {
     element.setAttribute('aria-selected', `${value}`);
   }
