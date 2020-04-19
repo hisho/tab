@@ -6,7 +6,7 @@ interface TabOptions {
   hash?: boolean
 }
 
-export default class Tab {
+class Tab {
   tabContainerName: string;
   tabContainerElement:HTMLElement;
   tabButtons:HTMLElement[];
@@ -91,3 +91,5 @@ export default class Tab {
     element.setAttribute('aria-selected', `${value}`);
   }
 }
+
+export default Tab;
